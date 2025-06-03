@@ -92,7 +92,7 @@ const Login = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigate("/");
+        navigate("/home");
       }, 2000);
     } else {
       setError("Usuário ou senha inválidos");
