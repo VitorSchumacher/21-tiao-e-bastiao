@@ -84,8 +84,9 @@ const Spinner = styled.div`
 const RegisterLink = styled(Link)`
   color: #4f46e5;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5%;
   text-decoration: underline;
+  font-size: 1rem;
 `;
 
 const Login = () => {

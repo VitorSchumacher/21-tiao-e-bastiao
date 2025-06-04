@@ -79,6 +79,20 @@ const Spinner = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
+const HeaderTitle = styled.h1`
+  color: #4f46e5;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  &:hover {
+    color: #333;
+  }
+`;
+
 const Register = () => {
   const navigate = useNavigate();
   const [nome, setNome] = useState("");
@@ -152,6 +166,7 @@ const Register = () => {
       )}
       <StyledCard>
         <Logo src="/image/gato.webp" alt="Logo do Projeto" />
+        <HeaderTitle>Cadastro</HeaderTitle>
         <Form onSubmit={handleSubmit} noValidate>
           <Input
             label="Nome"
