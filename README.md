@@ -1,35 +1,29 @@
 # CodeRace 2025 Frontend
 
-This project is a React application built with Vite. It contains a simple login
-form and a couple of pages used for the CodeRace 2025 event. The login form
-authenticates against the backend available at
-`https://code-race-qfh4.onrender.com/auth`.
+Este projeto é uma aplicação React construída com Vite. Ele contém um formulário de login simples e algumas páginas utilizadas no evento CodeRace 2025. O formulário de login se autentica no backend disponível em `https://code-race-qfh4.onrender.com/auth`.
 
-## Example login credentials
+## Exemplo de credenciais de login
 
-Any valid user registered in the backend can be used. When authentication
-succeeds the returned `slug`, `nome` and `token` are persisted in
-`localStorage` under the `userData` key and the user is redirected to the
-dashboard.
+Qualquer usuário válido registrado no backend pode ser utilizado. Quando a autenticação é bem-sucedida, o `slug`, `nome` e `token` retornados são salvos no `localStorage` na chave `userData` e o usuário é redirecionado para o dashboard.
 
-## Running locally
+## Rodando localmente
 
-The project uses **npm** as its package manager. To start a development server:
+O projeto usa **npm** como gerenciador de pacotes. Para iniciar um servidor de desenvolvimento:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Vite will start on `http://localhost:5173` by default.
+O Vite iniciará em `http://localhost:5173` por padrão.
 
-## Running tests
+## Rodando os testes
 
-Jest is configured for unit testing. After installing dependencies, run:
+O Jest está configurado para testes de unidade. Após instalar as dependências, execute:
 
 ```bash
 npm test
 ```
 
-The command executes all tests inside `src/__tests__`.
+O comando executa todos os testes dentro de `src/__tests__`.
 
