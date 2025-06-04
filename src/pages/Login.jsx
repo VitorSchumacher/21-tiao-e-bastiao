@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // src/pages/Login.jsx
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
@@ -13,7 +14,7 @@ const Container = styled.div`
   height: 100vh;
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   padding: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   transition: background 0.5s ease;
 `;
 
@@ -89,23 +90,9 @@ const Login = () => {
   const timeoutRef = useRef(null);
   const isMounted = useRef(true);
 
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-
   const startRedirect = (path) => {
-    const id = setTimeout(() => {
-      if (isMounted.current) {
-        setLoading(false);
-        navigate(path);
-      }
-    }, 2000);
-    timeoutRef.current = id;
+    setLoading(false);
+    navigate(path);
   };
 
   const handleSubmit = async (e) => {
@@ -113,27 +100,23 @@ const Login = () => {
     setError("");
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://code-race-qfh4.onrender.com/auth",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, senha: password }),
-        }
-      );
+      const response = await fetch("https://code-race-qfh4.onrender.com/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha: password }),
+      });
 
       if (!response.ok) {
         throw new Error("Login failed");
       }
 
       const data = await response.json();
+      console.log("🚀 ~ handleSubmit ~ data:", data);
       localStorage.setItem("userData", JSON.stringify(data));
-      startRedirect("/dashboard");
+      startRedirect("/home");
     } catch (err) {
-      if (isMounted.current) {
-        setLoading(false);
-        setError("Usuário ou senha inválidos");
-      }
+      setLoading(false);
+      setError("Usuário ou senha inválidos");
     }
   };
 
