@@ -1,12 +1,32 @@
-# React + Vite
+# CodeRace 2025 Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application built with Vite. It contains a simple login form and a couple of pages used for the CodeRace 2025 event. The credentials are hard coded for demonstration purposes.
 
-Currently, two official plugins are available:
+## Example login credentials
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use the following users to try the application:
 
-## Expanding the ESLint configuration
+- `admin` / `admin` – redirects to the dashboard
+- `bruno` / `bruno$2025` – redirects to the home page
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Running locally
+
+The project uses **npm** as its package manager. To start a development server:
+
+```bash
+npm install
+npm run dev
+```
+
+Vite will start on `http://localhost:5173` by default.
+
+## Running tests
+
+Jest is configured for unit testing. After installing dependencies, run:
+
+```bash
+npm test
+```
+
+The command executes all tests inside `src/__tests__`.
+
