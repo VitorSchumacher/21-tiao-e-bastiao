@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // src/pages/Login.jsx
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
@@ -88,12 +87,23 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const timeoutRef = useRef(null);
-  const isMounted = useRef(true);
+
 
   const startRedirect = (path) => {
-    setLoading(false);
-    navigate(path);
+    const id = setTimeout(() => {
+      setLoading(false);
+      navigate(path);
+    }, 2000);
+    timeoutRef.current = id;
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -111,9 +121,8 @@ const Login = () => {
       }
 
       const data = await response.json();
-      console.log("🚀 ~ handleSubmit ~ data:", data);
       localStorage.setItem("userData", JSON.stringify(data));
-      startRedirect("/home");
+      startRedirect("/dashboard");
     } catch (err) {
       setLoading(false);
       setError("Usuário ou senha inválidos");
