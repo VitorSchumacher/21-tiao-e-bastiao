@@ -30,4 +30,8 @@ export default [
       ],
     },
   },
+  {
+    files: ['src/__tests__/**/*.{js,jsx}'],
+    languageOptions: { globals: { ...globals.jest } },
+  },
 ]
