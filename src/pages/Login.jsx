@@ -1,5 +1,5 @@
 // src/pages/Login.jsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -77,20 +77,29 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === "admin" && password === "admin") {
       setError("");
       setLoading(true);
-      setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         setLoading(false);
         navigate("/dashboard");
       }, 2000);
     } else if (username === "bruno" && password === "bruno$2025") {
       setError("");
       setLoading(true);
-      setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         setLoading(false);
         navigate("/home");
       }, 2000);
