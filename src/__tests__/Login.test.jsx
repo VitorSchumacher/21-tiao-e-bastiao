@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => {
 describe('Login page', () => {
   beforeEach(() => {
     mockNavigate.mockReset();
-    global.fetch = jest.fn();
+    globalThis.fetch = jest.fn();
     localStorage.clear();
   });
 
@@ -32,7 +32,7 @@ describe('Login page', () => {
         <Login />
       </MemoryRouter>
     );
-    global.fetch.mockResolvedValue({ ok: false });
+    globalThis.fetch.mockResolvedValue({ ok: false });
     await user.type(
       screen.getByPlaceholderText(/digite seu email/i),
       'foo@test.com'
@@ -45,7 +45,7 @@ describe('Login page', () => {
   test('navigates to dashboard on valid admin login', async () => {
     jest.useFakeTimers();
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
-    global.fetch.mockResolvedValue({
+    globalThis.fetch.mockResolvedValue({
       ok: true,
       json: async () => ({ slug: 's', nome: 'n', token: 't' }),
     });
@@ -66,5 +66,17 @@ describe('Login page', () => {
       JSON.stringify({ slug: 's', nome: 'n', token: 't' })
     );
     jest.useRealTimers();
+  });
+
+  test('shows link to register', () => {
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('link', { name: /cadastre-se/i })).toHaveAttribute(
+      'href',
+      '/register'
+    );
   });
 });

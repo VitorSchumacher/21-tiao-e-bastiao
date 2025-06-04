@@ -1,10 +1,9 @@
-// src/pages/Login.jsx
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Card from "../components/Card";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -80,21 +79,16 @@ const Spinner = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
-const RegisterLink = styled(Link)`
-  color: #4f46e5;
-  text-align: center;
-  margin-top: 1rem;
-  text-decoration: underline;
-`;
-
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
   const timeoutRef = useRef(null);
-
 
   const startRedirect = (path) => {
     const id = setTimeout(() => {
@@ -112,27 +106,39 @@ const Login = () => {
     };
   }, []);
 
+  const validate = () => {
+    const newErrors = {};
+    if (!nome.trim()) newErrors.nome = "Nome obrigat\u00f3rio";
+    if (!email.trim()) newErrors.email = "Email obrigat\u00f3rio";
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email inv\u00e1lido";
+    if (senha.length < 6) newErrors.senha = "Senha deve ter 6 caracteres";
+    if (senha !== confirmarSenha)
+      newErrors.confirmarSenha = "As senhas n\u00e3o conferem";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setSubmitError("");
+    if (!validate()) return;
     setLoading(true);
     try {
-      const response = await fetch("https://code-race-qfh4.onrender.com/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha: password }),
-      });
-
+      const response = await fetch(
+        "https://code-race-qfh4.onrender.com/usuario",
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nome, email, senha }),
+        }
+      );
       if (!response.ok) {
-        throw new Error("Login failed");
+        throw new Error("Erro ao cadastrar");
       }
-
-      const data = await response.json();
-      localStorage.setItem("userData", JSON.stringify(data));
-      startRedirect("/dashboard");
+      startRedirect("/");
     } catch {
       setLoading(false);
-      setError("Usuário ou senha inválidos");
+      setSubmitError("Erro ao cadastrar usu\u00e1rio");
     }
   };
 
@@ -145,27 +151,43 @@ const Login = () => {
       )}
       <StyledCard>
         <Logo src="/image/gato.webp" alt="Logo do Projeto" />
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} noValidate>
+          <Input
+            label="Nome"
+            placeholder="Digite seu nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            error={errors.nome}
+          />
           <Input
             label="Email"
             placeholder="Digite seu email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            error={errors.email}
           />
           <Input
             label="Senha"
             placeholder="Digite sua senha"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            error={errors.senha}
           />
-          <Button type="submit">Entrar</Button>
-          <RegisterLink to="/register">Cadastre-se</RegisterLink>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <Input
+            label="Confirmar Senha"
+            placeholder="Confirme sua senha"
+            type="password"
+            value={confirmarSenha}
+            onChange={(e) => setConfirmarSenha(e.target.value)}
+            error={errors.confirmarSenha}
+          />
+          <Button type="submit">Cadastrar</Button>
+          {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
         </Form>
       </StyledCard>
     </Container>
   );
 };
 
-export default Login;
+export default Register;
