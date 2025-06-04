@@ -17,6 +17,12 @@ jest.mock('react-router-dom', () => {
 describe('Login page', () => {
   beforeEach(() => {
     mockNavigate.mockReset();
+    global.fetch = jest.fn();
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   test('shows error with invalid credentials', async () => {
@@ -26,7 +32,11 @@ describe('Login page', () => {
         <Login />
       </MemoryRouter>
     );
-    await user.type(screen.getByPlaceholderText(/digite seu nome/i), 'foo');
+    global.fetch.mockResolvedValue({ ok: false });
+    await user.type(
+      screen.getByPlaceholderText(/digite seu email/i),
+      'foo@test.com'
+    );
     await user.type(screen.getByPlaceholderText(/digite sua senha/i), 'bar');
     await user.click(screen.getByRole('button', { name: /entrar/i }));
     expect(screen.getByText(/usuário ou senha inválidos/i)).toBeInTheDocument();
@@ -35,12 +45,16 @@ describe('Login page', () => {
   test('navigates to dashboard on valid admin login', async () => {
     jest.useFakeTimers();
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({ slug: 's', nome: 'n', token: 't' }),
+    });
     render(
       <MemoryRouter>
         <Login />
       </MemoryRouter>
     );
-    await user.type(screen.getByPlaceholderText(/digite seu nome/i), 'admin');
+    await user.type(screen.getByPlaceholderText(/digite seu email/i), 'admin@test.com');
     await user.type(screen.getByPlaceholderText(/digite sua senha/i), 'admin');
     await user.click(screen.getByRole('button', { name: /entrar/i }));
     expect(mockNavigate).not.toHaveBeenCalled();
@@ -48,6 +62,9 @@ describe('Login page', () => {
       jest.runAllTimers();
     });
     expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
+    expect(localStorage.getItem('userData')).toBe(
+      JSON.stringify({ slug: 's', nome: 'n', token: 't' })
+    );
     jest.useRealTimers();
   });
 });
