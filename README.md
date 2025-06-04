@@ -1,13 +1,16 @@
 # CodeRace 2025 Frontend
 
-This project is a React application built with Vite. It contains a simple login form and a couple of pages used for the CodeRace 2025 event. The credentials are hard coded for demonstration purposes.
+This project is a React application built with Vite. It contains a simple login
+form and a couple of pages used for the CodeRace 2025 event. The login form
+authenticates against the backend available at
+`https://code-race-qfh4.onrender.com/auth`.
 
 ## Example login credentials
 
-Use the following users to try the application:
-
-- `admin` / `admin` – redirects to the dashboard
-- `bruno` / `bruno$2025` – redirects to the home page
+Any valid user registered in the backend can be used. When authentication
+succeeds the returned `slug`, `nome` and `token` are persisted in
+`localStorage` under the `userData` key and the user is redirected to the
+dashboard.
 
 ## Running locally
 

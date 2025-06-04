@@ -82,7 +82,7 @@ const Spinner = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -108,18 +108,32 @@ const Login = () => {
     timeoutRef.current = id;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin") {
-      setError("");
-      setLoading(true);
+    setError("");
+    setLoading(true);
+    try {
+      const response = await fetch(
+        "https://code-race-qfh4.onrender.com/auth",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, senha: password }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("userData", JSON.stringify(data));
       startRedirect("/dashboard");
-    } else if (username === "bruno" && password === "bruno$2025") {
-      setError("");
-      setLoading(true);
-      startRedirect("/home");
-    } else {
-      setError("Usuário ou senha inválidos");
+    } catch (err) {
+      if (isMounted.current) {
+        setLoading(false);
+        setError("Usuário ou senha inválidos");
+      }
     }
   };
 
@@ -134,10 +148,10 @@ const Login = () => {
         <Logo src="/image/gato.webp" alt="Logo do Projeto" />
         <Form onSubmit={handleSubmit}>
           <Input
-            label="Usuário"
-            placeholder="Digite seu nome"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            label="Email"
+            placeholder="Digite seu email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             label="Senha"
