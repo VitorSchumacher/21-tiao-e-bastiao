@@ -11,8 +11,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   padding: 1rem;
+  font-family: 'Roboto', sans-serif;
+  transition: background 0.5s ease;
 `;
 
 const Logo = styled.img`
@@ -30,11 +32,18 @@ const Form = styled.form`
 
 const StyledCard = styled(Card)`
   padding: 3.5rem;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
   width: 100%;
   max-width: 850px;
   min-height: 400px;
+  background-color: #ffffffee;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const ErrorMessage = styled.p`
