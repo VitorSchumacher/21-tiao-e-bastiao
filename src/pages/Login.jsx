@@ -77,32 +77,38 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const timerRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const isMounted = useRef(true);
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
+      isMounted.current = false;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
     };
   }, []);
+
+  const startRedirect = (path) => {
+    const id = setTimeout(() => {
+      if (isMounted.current) {
+        setLoading(false);
+        navigate(path);
+      }
+    }, 2000);
+    timeoutRef.current = id;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === "admin" && password === "admin") {
       setError("");
       setLoading(true);
-      timerRef.current = setTimeout(() => {
-        setLoading(false);
-        navigate("/dashboard");
-      }, 2000);
+      startRedirect("/dashboard");
     } else if (username === "bruno" && password === "bruno$2025") {
       setError("");
       setLoading(true);
-      timerRef.current = setTimeout(() => {
-        setLoading(false);
-        navigate("/home");
-      }, 2000);
+      startRedirect("/home");
     } else {
       setError("Usuário ou senha inválidos");
     }
