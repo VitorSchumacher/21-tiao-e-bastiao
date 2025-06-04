@@ -90,10 +90,10 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const timeoutRef = useRef(null);
 
-  const startRedirect = (path) => {
+  const startRedirect = (path, state) => {
     const id = setTimeout(() => {
       setLoading(false);
-      navigate(path);
+      navigate(path, { state });
     }, 2000);
     timeoutRef.current = id;
   };
@@ -136,7 +136,7 @@ const Register = () => {
       if (!response.ok) {
         throw new Error("Erro ao cadastrar");
       }
-      startRedirect("/");
+      startRedirect("/", { registrationSuccess: true });
     } catch {
       setLoading(false);
       setSubmitError("Erro ao cadastrar usu\u00e1rio");

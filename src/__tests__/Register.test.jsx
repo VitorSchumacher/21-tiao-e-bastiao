@@ -56,13 +56,15 @@ describe('Register page', () => {
     await user.click(screen.getByRole('button', { name: /cadastrar/i }));
     expect(globalThis.fetch).toHaveBeenCalledWith(
       'https://code-race-qfh4.onrender.com/usuario',
-      expect.objectContaining({ method: 'PUT' })
+      expect.objectContaining({ method: 'POST' })
     );
     expect(mockNavigate).not.toHaveBeenCalled();
     act(() => {
       jest.runAllTimers();
     });
-    expect(mockNavigate).toHaveBeenCalledWith('/');
+    expect(mockNavigate).toHaveBeenCalledWith('/', {
+      state: { registrationSuccess: true },
+    });
     jest.useRealTimers();
   });
 });

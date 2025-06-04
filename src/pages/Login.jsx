@@ -4,7 +4,8 @@ import styled, { keyframes } from "styled-components";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Card from "../components/Card";
-import { useNavigate, Link } from "react-router-dom";
+import Toast from "../components/Toast";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -89,12 +90,15 @@ const RegisterLink = styled(Link)`
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(
+    location.state?.registrationSuccess || false
+  );
   const timeoutRef = useRef(null);
-
 
   const startRedirect = (path) => {
     const id = setTimeout(() => {
@@ -111,6 +115,19 @@ const Login = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (location.state?.registrationSuccess) {
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showSuccess) {
+      const timer = setTimeout(() => setShowSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccess]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -138,6 +155,9 @@ const Login = () => {
 
   return (
     <Container>
+      {showSuccess && (
+        <Toast message="Cadastro realizado com sucesso!" type="success" />
+      )}
       {loading && (
         <LoadingOverlay>
           <Spinner />
