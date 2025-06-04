@@ -31,12 +31,12 @@ const Form = styled.form`
 `;
 
 const StyledCard = styled(Card)`
-  padding: 3.5rem;
+  padding: 4rem;
   border-radius: 20px;
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 850px;
-  min-height: 400px;
+  max-width: 1000px;
+  min-height: 500px;
   background-color: #ffffffee;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 
