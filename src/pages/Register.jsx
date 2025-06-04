@@ -110,7 +110,8 @@ const Register = () => {
     const newErrors = {};
     if (!nome.trim()) newErrors.nome = "Nome obrigat\u00f3rio";
     if (!email.trim()) newErrors.email = "Email obrigat\u00f3rio";
-    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email inv\u00e1lido";
+    else if (!/\S+@\S+\.\S+/.test(email))
+      newErrors.email = "Email inv\u00e1lido";
     if (senha.length < 6) newErrors.senha = "Senha deve ter 6 caracteres";
     if (senha !== confirmarSenha)
       newErrors.confirmarSenha = "As senhas n\u00e3o conferem";
@@ -127,7 +128,7 @@ const Register = () => {
       const response = await fetch(
         "https://code-race-qfh4.onrender.com/usuario",
         {
-          method: "PUT",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nome, email, senha }),
         }
