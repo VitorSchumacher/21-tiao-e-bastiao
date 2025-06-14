@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import LogoutButton from "../components/LogoutButton";
 import DoubleDiagonalBanner from "../components/DoubleDiagonalBanner";
+import FormIcon from "../components/FormIcon";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -99,7 +100,7 @@ const Home = () => {
             }}
           >
             <div style={{ flex: 1, minWidth: "300px" }}>
-              {/* adicionar icone de formulario  */}
+              <FormIcon size={40} style={{ color: "#4f46e5", marginBottom: "0.5rem" }} />
               <p>
                 Este formulário foi desenvolvido para avaliar o raciocínio
                 lógico do aluno, abordando questões que envolvem:
