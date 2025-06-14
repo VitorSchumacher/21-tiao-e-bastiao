@@ -147,7 +147,8 @@ const Login = () => {
 
       const data = await response.json();
       localStorage.setItem("userData", JSON.stringify(data));
-      startRedirect("/dashboard");
+      const redirectPath = data.tipoUsuario === 1 ? "/dashboard" : "/home";
+      startRedirect(redirectPath);
     } catch {
       setLoading(false);
       setError("Usuário ou senha inválidos");

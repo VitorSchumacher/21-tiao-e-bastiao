@@ -4,7 +4,7 @@ Este projeto é uma aplicação React construída com Vite. Ele contém um formu
 
 ## Exemplo de credenciais de login
 
-Qualquer usuário válido registrado no backend pode ser utilizado. Quando a autenticação é bem-sucedida, o `slug`, `nome` e `token` retornados são salvos no `localStorage` na chave `userData` e o usuário é redirecionado para o dashboard.
+Qualquer usuário válido registrado no backend pode ser utilizado. Quando a autenticação é bem-sucedida, o `slug`, `nome`, `token` e `tipoUsuario` retornados são salvos no `localStorage` na chave `userData`. Se o usuário for professor (`tipoUsuario` igual a `1`), ele é redirecionado para o dashboard; caso contrário, é levado para a página inicial com informações sobre os formulários disponíveis.
 
 ## Rodando localmente
 

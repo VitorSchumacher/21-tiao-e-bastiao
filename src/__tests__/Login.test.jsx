@@ -42,12 +42,12 @@ describe('Login page', () => {
     expect(screen.getByText(/usuário ou senha inválidos/i)).toBeInTheDocument();
   });
 
-  test('navigates to dashboard on valid admin login', async () => {
+  test('navigates to dashboard on valid teacher login', async () => {
     jest.useFakeTimers();
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     globalThis.fetch.mockResolvedValue({
       ok: true,
-      json: async () => ({ slug: 's', nome: 'n', token: 't' }),
+      json: async () => ({ slug: 's', nome: 'n', token: 't', tipoUsuario: 1 }),
     });
     render(
       <MemoryRouter>
@@ -63,7 +63,33 @@ describe('Login page', () => {
     });
     expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
     expect(localStorage.getItem('userData')).toBe(
-      JSON.stringify({ slug: 's', nome: 'n', token: 't' })
+      JSON.stringify({ slug: 's', nome: 'n', token: 't', tipoUsuario: 1 })
+    );
+    jest.useRealTimers();
+  });
+
+  test('navigates to home on valid student login', async () => {
+    jest.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    globalThis.fetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({ slug: 's', nome: 'n', token: 't', tipoUsuario: 0 }),
+    });
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>
+    );
+    await user.type(screen.getByPlaceholderText(/digite seu email/i), 'aluno@test.com');
+    await user.type(screen.getByPlaceholderText(/digite sua senha/i), 'aluno');
+    await user.click(screen.getByRole('button', { name: /entrar/i }));
+    expect(mockNavigate).not.toHaveBeenCalled();
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(mockNavigate).toHaveBeenCalledWith('/home');
+    expect(localStorage.getItem('userData')).toBe(
+      JSON.stringify({ slug: 's', nome: 'n', token: 't', tipoUsuario: 0 })
     );
     jest.useRealTimers();
   });
