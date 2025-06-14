@@ -83,10 +83,12 @@ const Questionario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const respostas = questions.map((q, index) => ({
-        slug: q.slug || q.id || index,
-        letraEscolhida: answers[index],
-      })).filter((r) => r.letraEscolhida !== undefined);
+      const respostas = questions
+        .map((q, index) => ({
+          slug: q.slug || q.id || index,
+          letraEscolhida: answers[index],
+        }))
+        .filter((r) => r.letraEscolhida !== undefined);
       const payload = { slug: formSlug, respostas };
       const response = await fetch(
         "https://code-race-qfh4.onrender.com/questionario/responder",
@@ -114,43 +116,62 @@ const Questionario = () => {
       <Banner>
         <UserMenu name={name} />
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <img src="/image/logo.png" alt="Logo Orienta" style={{ height: "60px" }} />
+          <img
+            src="/image/logo.png"
+            alt="Logo Orienta"
+            style={{ height: "100px", marginRight: "-2rem" }}
+          />
           <Title style={{ flex: "unset" }}>Orienta</Title>
         </div>
       </Banner>
       {loading && <Loader />}
       {error && <p>{error}</p>}
       {!loading && !error && (
-        <form onSubmit={handleSubmit} style={{ maxWidth: "800px", margin: "0 auto" }}>
-          {questions.map((q, index) => (
-            <QuestionWrapper key={q.id || index}>
-              <p>{q.enunciado || q.pergunta || q.titulo}</p>
-              <Options>
-                {(q.opcoes || q.alternativas || []).map((opt, idx) => {
-                  const value = opt.id ?? idx;
-                  const label = opt.texto || opt;
-                  return (
-                    <label key={value} style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-                      <input
-                        type="radio"
-                        name={`q-${index}`}
-                        value={value}
-                        checked={answers[index] === value}
-                        onChange={() => handleChange(index, value)}
-                      />
-                      {label}
-                    </label>
-                  );
-                })}
-              </Options>
-            </QuestionWrapper>
-          ))}
-          {questions.length > 0 && (
-            <Button type="submit" style={{ marginTop: "1rem" }}>
-              Enviar
-            </Button>
-          )}
-        </form>
+        <div>
+          <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+            Questionário de Lógica
+          </h1>
+          <form
+            onSubmit={handleSubmit}
+            style={{ maxWidth: "800px", margin: "0 auto" }}
+          >
+            {questions.map((q, index) => (
+              <QuestionWrapper key={q.id || index}>
+                <p>{q.enunciado || q.pergunta || q.titulo}</p>
+                <Options>
+                  {(q.opcoes || q.alternativas || []).map((opt, idx) => {
+                    const value = opt.id ?? idx;
+                    const label = opt.texto || opt;
+                    return (
+                      <label
+                        key={value}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.25rem",
+                        }}
+                      >
+                        <input
+                          type="radio"
+                          name={`q-${index}`}
+                          value={value}
+                          checked={answers[index] === value}
+                          onChange={() => handleChange(index, value)}
+                        />
+                        {label}
+                      </label>
+                    );
+                  })}
+                </Options>
+              </QuestionWrapper>
+            ))}
+            {questions.length > 0 && (
+              <Button type="submit" style={{ marginTop: "1rem" }}>
+                Enviar
+              </Button>
+            )}
+          </form>
+        </div>
       )}
     </Container>
   );

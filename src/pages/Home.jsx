@@ -19,7 +19,6 @@ const Banner = styled.div`
   color: #fff;
   padding: 4rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
   margin: -2rem -2rem 2rem;
@@ -43,7 +42,6 @@ const Intro = styled.div`
 
 const IntroText = styled.div`
   width: 60%;
-  max-width: 600px;
 `;
 
 const IntroHeading = styled.h2`
@@ -71,11 +69,23 @@ const Home = () => {
     <Container>
       <Banner>
         <UserMenu name={name} />
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            width: "100%",
+            flex: 1,
+            justifyContent: "center",
+            margin: "0 1rem",
+            textAlign: "center",
+            marginLeft: "-3rem",
+          }}
+        >
           <img
             src="/image/logo.png"
             alt="Logo Orienta"
-            style={{ height: "60px" }}
+            style={{ height: "100px", marginRight: "-2rem" }}
           />
           <Title style={{ flex: "unset" }}>Orienta</Title>
         </div>
