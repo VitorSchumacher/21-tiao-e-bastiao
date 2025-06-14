@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import LogicForm from "./pages/LogicForm";
+import MathForm from "./pages/MathForm";
+import PortugueseForm from "./pages/PortugueseForm";
 import NotFound from "./pages/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -34,6 +36,22 @@ const App = () => {
         element={
           <PrivateRoute>
             <LogicForm />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/forms/math"
+        element={
+          <PrivateRoute>
+            <MathForm />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/forms/portuguese"
+        element={
+          <PrivateRoute>
+            <PortugueseForm />
           </PrivateRoute>
         }
       />

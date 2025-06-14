@@ -147,10 +147,102 @@ const Home = () => {
           </div>
         </li>
         <li style={{ marginBottom: "0.5rem" }}>
-          <Button disabled>Formulário de Matemática</Button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              border: "1px solid #4f46e5cc",
+              padding: "1rem",
+              borderRadius: "8px",
+              margin: "3rem 0",
+            }}
+          >
+            <div
+              style={{
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                gap: "1rem",
+                margin: "1rem 0",
+              }}
+            >
+              <FormIcon
+                size={40}
+                style={{ color: "#4f46e5", marginBottom: "0.5rem" }}
+              />
+              <h3 style={{ margin: "0.5rem", display: "inline" }}>
+                Formulário de Matemática
+              </h3>
+            </div>
+            <div style={{ flex: 1, minWidth: "300px" }}>
+              <p>
+                Este formulário aborda tópicos básicos de matemática para
+                reforçar o aprendizado do aluno.
+              </p>
+              <ul style={{ margin: "0.5rem 2rem" }}>
+                <li>Operações aritméticas</li>
+                <li>Problemas de geometria simples</li>
+                <li>Interpretação de gráficos</li>
+                <li>Raciocínio numérico</li>
+              </ul>
+            </div>
+            <div style={{ marginLeft: "1rem", width: "200px" }}>
+              <Button onClick={() => navigate("/forms/math")}>Ir para o formulário de Matemática</Button>
+            </div>
+          </div>
         </li>
         <li>
-          <Button disabled>Formulário de Português</Button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              border: "1px solid #4f46e5cc",
+              padding: "1rem",
+              borderRadius: "8px",
+              margin: "3rem 0",
+            }}
+          >
+            <div
+              style={{
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                gap: "1rem",
+                margin: "1rem 0",
+              }}
+            >
+              <FormIcon
+                size={40}
+                style={{ color: "#4f46e5", marginBottom: "0.5rem" }}
+              />
+              <h3 style={{ margin: "0.5rem", display: "inline" }}>
+                Formulário de Português
+              </h3>
+            </div>
+            <div style={{ flex: 1, minWidth: "300px" }}>
+              <p>
+                Questões focadas em interpretação de texto e gramática para
+                avaliar o domínio da língua.
+              </p>
+              <ul style={{ margin: "0.5rem 2rem" }}>
+                <li>Compreensão de leitura</li>
+                <li>Ortografia e acentuação</li>
+                <li>Classes gramaticais</li>
+                <li>Análise sintática básica</li>
+              </ul>
+            </div>
+            <div style={{ marginLeft: "1rem", width: "200px" }}>
+              <Button onClick={() => navigate("/forms/portuguese")}>Ir para o formulário de Português</Button>
+            </div>
+          </div>
         </li>
       </ul>
       <div style={{ marginTop: "1rem" }}>
