@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Svg = styled.svg`
   display: block;
+  overflow: visible;
 `;
 
 const ScoreText = styled.text`
