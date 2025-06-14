@@ -57,7 +57,7 @@ describe('Register page', () => {
     await user.type(screen.getByPlaceholderText(/confirme sua senha/i), '123456');
     await user.click(screen.getByRole('button', { name: /cadastrar/i }));
     expect(globalThis.fetch).toHaveBeenCalledWith(
-      'https://code-race-qfh4.onrender.com/usuario',
+      '/api/usuario',
       expect.objectContaining({ method: 'POST' })
     );
     expect(mockNavigate).not.toHaveBeenCalled();

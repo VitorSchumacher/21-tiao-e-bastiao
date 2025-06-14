@@ -7,6 +7,8 @@ import FormLayout, { Form, Logo } from "../components/FormLayout";
 import Toast from "../components/Toast";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 
+const API_BASE_URL = process.env.VITE_API_BASE_URL || "/api";
+
 const ErrorMessage = styled.p`
   color: red;
   text-align: center;
@@ -95,7 +97,7 @@ const Login = () => {
     setError("");
     setLoading(true);
     try {
-      const response = await fetch("https://code-race-qfh4.onrender.com/auth", {
+      const response = await fetch(`${API_BASE_URL}/auth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha: password }),
