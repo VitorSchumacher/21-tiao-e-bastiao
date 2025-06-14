@@ -1,6 +1,5 @@
 export async function evaluateStudent(resultData) {
-  const apiKey =
-    "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";
+  const apiKey = process.env.VITE_OPENAI_API_KEY;
 
   if (!apiKey) {
     throw new Error("OpenAI API key not provided");
@@ -61,8 +60,7 @@ export async function evaluateStudent(resultData) {
 }
 
 export async function teacherAdvice(studentData) {
-  const apiKey =
-    "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";
+  const apiKey = process.env.VITE_OPENAI_API_KEY;
 
   if (!apiKey) {
     throw new Error("OpenAI API key not provided");

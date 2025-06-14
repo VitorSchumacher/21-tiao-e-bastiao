@@ -3,6 +3,7 @@ import { teacherAdvice } from '../services/gpt';
 describe('teacherAdvice', () => {
   beforeEach(() => {
     globalThis.fetch = jest.fn();
+    process.env.VITE_OPENAI_API_KEY = 'k';
   });
 
   afterEach(() => {
