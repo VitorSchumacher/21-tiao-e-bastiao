@@ -31,6 +31,7 @@ describe('Register page', () => {
         <Register />
       </MemoryRouter>
     );
+    await user.selectOptions(screen.getByRole('combobox'), 'professor');
     await user.type(screen.getByPlaceholderText(/digite seu nome/i), 'Foo');
     await user.type(screen.getByPlaceholderText(/digite seu email/i), 'foo@test.com');
     await user.type(screen.getByPlaceholderText(/digite sua senha/i), '123456');
@@ -49,6 +50,7 @@ describe('Register page', () => {
         <Register />
       </MemoryRouter>
     );
+    await user.selectOptions(screen.getByRole('combobox'), 'professor');
     await user.type(screen.getByPlaceholderText(/digite seu nome/i), 'Foo');
     await user.type(screen.getByPlaceholderText(/digite seu email/i), 'foo@test.com');
     await user.type(screen.getByPlaceholderText(/digite sua senha/i), '123456');
