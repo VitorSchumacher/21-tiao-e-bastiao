@@ -71,12 +71,14 @@ const Home = () => {
     <Container>
       <Banner>
         <UserMenu name={name} />
-        <img
-          src="/image/logo.png"
-          alt="Logo Orienta"
-          style={{ height: "60px" }}
-        />
-        <Title>Orienta</Title>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <img
+            src="/image/logo.png"
+            alt="Logo Orienta"
+            style={{ height: "60px" }}
+          />
+          <Title style={{ flex: "unset" }}>Orienta</Title>
+        </div>
       </Banner>
       <Intro>
         <IntroText>
