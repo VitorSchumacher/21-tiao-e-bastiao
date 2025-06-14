@@ -5,6 +5,8 @@ import LogoutButton from "../components/LogoutButton";
 import UserMenu from "../components/UserMenu";
 import ScoreGauge from "../components/ScoreGauge";
 import EyeIcon from "../components/EyeIcon";
+import Button from "../components/Button";
+import { teacherAdvice } from "../services/gpt";
 
 const API_BASE_URL = process.env.VITE_API_BASE_URL || "/api";
 
@@ -55,12 +57,25 @@ const Dashboard = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState({});
+  const [advice, setAdvice] = useState({});
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Professor";
   const token = userData.token || "";
 
   const toggleRow = (index) => {
     setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const getAdvice = async (index) => {
+    const student = students[index];
+    if (!student) return;
+    setAdvice((prev) => ({ ...prev, [index]: { loading: true } }));
+    try {
+      const text = await teacherAdvice(student);
+      setAdvice((prev) => ({ ...prev, [index]: { text } }));
+    } catch (e) {
+      setAdvice((prev) => ({ ...prev, [index]: { text: "Erro ao obter resumo" } }));
+    }
   };
 
   useEffect(() => {
@@ -173,6 +188,17 @@ const Dashboard = () => {
                         ) : (
                           <em>Nenhum resultado</em>
                         )}
+                        <div style={{ marginTop: "0.5rem" }}>
+                          <Button onClick={() => getAdvice(idx)}>
+                            Resumo de como ajudar
+                          </Button>
+                          {advice[idx]?.loading && (
+                            <span style={{ marginLeft: "0.5rem" }}>Carregando...</span>
+                          )}
+                          {advice[idx]?.text && (
+                            <p style={{ marginTop: "0.5rem" }}>{advice[idx].text}</p>
+                          )}
+                        </div>
                       </Td>
                     </tr>
                   )}
