@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import UserMenu from "../components/UserMenu";
 import Loader from "../components/Loader";
+import { evaluateStudent } from "../services/gpt";
 
 const Container = styled.div`
   padding: 2rem;
@@ -48,6 +49,7 @@ const Questionario = () => {
   const [formSlug, setFormSlug] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState(null);
 
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Aluno";
@@ -104,7 +106,15 @@ const Questionario = () => {
       if (!response.ok) {
         throw new Error("Erro ao enviar respostas");
       }
+      const resultData = await response.json();
       console.log("Respostas enviadas com sucesso");
+      try {
+        const evalData = await evaluateStudent(resultData);
+        const score = evalData.pontuacao ?? "-";
+        setFeedback(`Pontuação: ${score} - ${evalData.feedback}`);
+      } catch (gptErr) {
+        console.error(gptErr);
+      }
     } catch (err) {
       console.error(err);
       setError("Erro ao enviar respostas");
@@ -171,6 +181,9 @@ const Questionario = () => {
               </Button>
             )}
           </form>
+          {feedback && (
+            <p style={{ marginTop: "2rem", whiteSpace: "pre-line" }}>{feedback}</p>
+          )}
         </div>
       )}
     </Container>
