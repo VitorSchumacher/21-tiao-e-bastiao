@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   padding: 2rem;
   min-height: 100vh;
-  font-family: "Edu TAS Beginner", cursive;
+  font-family: "Inter", sans-serif;
   background: "#fff";
   color: #000;
 `;
@@ -23,6 +23,7 @@ const Banner = styled.div`
 
 const Title = styled.h1`
   font-size: 2.5rem;
+  font-family: "Edu TAS Beginner", cursive;
   margin: 0;
 `;
 
