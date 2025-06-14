@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../components/Button";
 import LogoutButton from "../components/LogoutButton";
+import DoubleDiagonalBanner from "../components/DoubleDiagonalBanner";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -81,9 +82,9 @@ const Home = () => {
         <IntroImage src="/image/imagem_home.jpg" alt="Imagem inicial" />
       </Intro>
       <div style={{ marginTop: "5rem" }}>
-        <Banner>
+        <DoubleDiagonalBanner>
           <Title>Formulários</Title>
-        </Banner>
+        </DoubleDiagonalBanner>
       </div>
       <ul style={{ listStyle: "none", padding: 0, marginBottom: "1rem" }}>
         <li style={{ marginBottom: "0.5rem" }}>
