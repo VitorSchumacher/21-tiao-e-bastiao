@@ -64,6 +64,7 @@ const Home = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Aluno";
+  console.log("🚀 ~ Home ~ userData:", userData);
 
   return (
     <Container>

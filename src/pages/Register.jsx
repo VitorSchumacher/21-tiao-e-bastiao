@@ -126,50 +126,54 @@ const Register = () => {
           <Spinner />
         </LoadingOverlay>
       )}
-      <Logo src="/image/gato.webp" alt="Logo do Projeto" />
-        <HeaderTitle>Cadastro</HeaderTitle>
-        <Form onSubmit={handleSubmit} noValidate>
-          <Input
-            label="Nome"
-            placeholder="Digite seu nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            error={errors.nome}
-          />
-          <Input
-            label="Email"
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-          />
-          <Input
-            label="Senha"
-            placeholder="Digite sua senha"
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            error={errors.senha}
-          />
-          <Input
-            label="Confirmar Senha"
-            placeholder="Confirme sua senha"
-            type="password"
-            value={confirmarSenha}
-            onChange={(e) => setConfirmarSenha(e.target.value)}
-            error={errors.confirmarSenha}
-          />
-          <Select
-            label="Tipo de usuário"
-            value={tipoUsuario}
-            onChange={(e) => setTipoUsuario(parseInt(e.target.value, 10))}
-          >
-            <option value={1}>Professor</option>
-            <option value={0}>Aluno</option>
-          </Select>
-          <Button type="submit">Cadastrar</Button>
-          {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
-        </Form>
+      <Logo
+        src="/image/logo_cor.png"
+        alt="Logo do Projeto"
+        style={{ marginBottom: "-3rem" }}
+      />
+      <HeaderTitle>Cadastro</HeaderTitle>
+      <Form onSubmit={handleSubmit} noValidate>
+        <Input
+          label="Nome"
+          placeholder="Digite seu nome"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          error={errors.nome}
+        />
+        <Input
+          label="Email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={errors.email}
+        />
+        <Input
+          label="Senha"
+          placeholder="Digite sua senha"
+          type="password"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          error={errors.senha}
+        />
+        <Input
+          label="Confirmar Senha"
+          placeholder="Confirme sua senha"
+          type="password"
+          value={confirmarSenha}
+          onChange={(e) => setConfirmarSenha(e.target.value)}
+          error={errors.confirmarSenha}
+        />
+        <Select
+          label="Tipo de usuário"
+          value={tipoUsuario}
+          onChange={(e) => setTipoUsuario(parseInt(e.target.value, 10))}
+        >
+          <option value={1}>Professor</option>
+          <option value={0}>Aluno</option>
+        </Select>
+        <Button type="submit">Cadastrar</Button>
+        {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
+      </Form>
     </FormLayout>
   );
 };

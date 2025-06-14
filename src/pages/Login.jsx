@@ -127,25 +127,44 @@ const Login = () => {
           <Spinner />
         </LoadingOverlay>
       )}
-      <Logo src="/image/gato.webp" alt="Logo do Projeto" />
-        <Form onSubmit={handleSubmit}>
-          <Input
-            label="Email"
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            label="Senha"
-            placeholder="Digite sua senha"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button type="submit">Entrar</Button>
-          <RegisterLink to="/register">Cadastre-se</RegisterLink>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-        </Form>
+      <img
+        src="/image/logo_cor.png"
+        style={{
+          width: "200px",
+          height: "auto",
+          display: "block",
+          margin: "0 auto 1.5rem auto",
+        }}
+      />
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "2rem",
+          marginTop: "-5rem",
+          fontFamily: "Inter, sans-serif",
+          color: "#4f46e5",
+        }}
+      >
+        Orienta
+      </h1>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          label="Email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          label="Senha"
+          placeholder="Digite sua senha"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit">Entrar</Button>
+        <RegisterLink to="/register">Cadastre-se</RegisterLink>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </Form>
     </FormLayout>
   );
 };

@@ -35,10 +35,11 @@ export const Form = styled.form`
 `;
 
 export const Logo = styled.img`
-  width: 100px;
+  width: 200px;
   height: auto;
   display: block;
   margin: 0 auto 1.5rem auto;
+  animation: fadeIn 1s ease-in-out;
 `;
 
 const FormLayout = ({ children }) => {

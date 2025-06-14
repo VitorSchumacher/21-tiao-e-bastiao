@@ -109,9 +109,7 @@ const Questionario = () => {
       console.log("Respostas enviadas com sucesso");
       try {
         const evalData = await evaluateStudent(resultData);
-        const score = evalData.pontuacao ?? "-";
-        setFeedback(`Pontuação: ${score} - ${evalData.feedback}`);
-        console.log("🚀 ~ handleSubmit ~ feedback:", feedback);
+        setFeedback(evalData);
       } catch (gptErr) {
         console.error(gptErr);
       }
@@ -135,7 +133,11 @@ const Questionario = () => {
           <Title style={{ flex: "unset" }}>Orienta</Title>
         </div>
       </Banner>
-      {loading && <Loader />}
+      {loading && (
+        <div style={{ textAlign: "center", width: "100%" }}>
+          <Loader />
+        </div>
+      )}
       {error && <p>{error}</p>}
       {!loading && !error && (
         <div>
@@ -186,9 +188,41 @@ const Questionario = () => {
             </form>
           )}
           {!submitting && feedback && (
-            <p style={{ marginTop: "2rem", whiteSpace: "pre-line" }}>
-              {feedback}
-            </p>
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p
+                style={{
+                  marginTop: "2rem",
+                  whiteSpace: "pre-line",
+                  width: "100%",
+                  textAlign: "center",
+                  padding: "0rem 1rem",
+                }}
+              >
+                <p style={{ fontWeight: "bold", display: "inline" }}>
+                  Pontuação:
+                  <p
+                    style={{
+                      display: "inline",
+                      color: feedback.pontuacao < 500 ? "red" : "green",
+                      marginLeft: "0.5rem",
+                    }}
+                  >
+                    {feedback.pontuacao || feedback.nota}
+                  </p>
+                </p>
+                {feedback.feedback && (
+                  <p style={{ whiteSpace: "pre-line", marginTop: "1rem" }}>
+                    {feedback.feedback}
+                  </p>
+                )}
+              </p>
+            </div>
           )}
         </div>
       )}

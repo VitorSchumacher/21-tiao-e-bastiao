@@ -1,6 +1,6 @@
 export async function evaluateStudent(resultData) {
   const apiKey =
-    "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";
+    "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";
 
   if (!apiKey) {
     throw new Error("OpenAI API key not provided");
@@ -16,7 +16,7 @@ export async function evaluateStudent(resultData) {
       role: "user",
       content: `Você é um avaliador educacional. Responda apenas em JSON no formato {"pontuacao": <numero>, "feedback": "texto"}. Não inclua texto fora desse JSON. Resultados do aluno: ${JSON.stringify(
         resultData
-      )}, a nota final é de 0 a 1000. Avalie o desempenho do aluno e forneça feedback construtivo. retorne apenas em JSON {nota: uma nota de 0 a 1000, feedback: um texto de até 500 caracteres explicando o desempenho do aluno e sugerindo melhorias.}`,
+      )}, a nota final é de 0 a 1000. Avalie o desempenho do aluno e forneça feedback construtivo. retorne apenas em JSON {nota: uma nota de 0 a 1000, feedback: um texto de até 500 caracteres explicando o desempenho do aluno e sugerindo melhorias, de sugestões válidas de oq estudar mais baseado nas questões.}`,
     },
   ];
 
