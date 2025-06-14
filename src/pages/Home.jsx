@@ -53,7 +53,7 @@ const Home = () => {
         <div style={{ width: "60%", maxWidth: "600px" }}>
           <h2
             style={{
-              fontSize: "2rem",
+              fontSize: "1.7rem",
               marginBottom: "1rem",
               textAlign: "center",
             }}
@@ -80,14 +80,47 @@ const Home = () => {
         </div>
         <IntroImage src="/image/imagem_home.jpg" alt="Imagem inicial" />
       </Intro>
+      <div style={{ marginTop: "5rem" }}>
+        <Banner>
+          <Title>Formulários</Title>
+        </Banner>
+      </div>
       <ul style={{ listStyle: "none", padding: 0, marginBottom: "1rem" }}>
         <li style={{ marginBottom: "0.5rem" }}>
-          <div>
-            <p>aqui vai oque o formulario traz</p>
-            <p> icone bonito sobre logica</p>
-            <Button onClick={() => navigate("/forms/logic")}>
-              Formulário de Lógica
-            </Button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              border: "1px solid #4f46e5cc",
+              padding: "1rem",
+              borderRadius: "8px",
+            }}
+          >
+            <div style={{ flex: 1, minWidth: "300px" }}>
+              <p>
+                Este formulário foi desenvolvido para avaliar o raciocínio
+                lógico do aluno, abordando questões que envolvem:
+              </p>
+              <ul style={{ margin: "0.5rem 2rem" }}>
+                <li>Padrões e sequências numéricas</li>
+                <li>Análise de proposições verdadeiras e falsas</li>
+                <li>Resolução de problemas com lógica dedutiva</li>
+                <li>Interpretação de situações-problema</li>
+              </ul>
+              <p>
+                Ao final da atividade, o aluno receberá um relatório
+                personalizado com seu desempenho, indicando os pontos fortes e
+                as habilidades lógicas que precisam ser reforçadas. As respostas
+                também serão encaminhadas ao professor responsável para
+                acompanhamento individual.
+              </p>
+            </div>
+            <div style={{ marginLeft: "1rem", width: "200px" }}>
+              <Button onClick={() => navigate("/forms/logic")}>
+                Ir para o formulário de Lógica
+              </Button>
+            </div>
           </div>
         </li>
         <li style={{ marginBottom: "0.5rem" }}>
