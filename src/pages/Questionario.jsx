@@ -52,6 +52,7 @@ const Questionario = () => {
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [slug, setSlug] = useState("");
 
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Aluno";
@@ -68,6 +69,7 @@ const Questionario = () => {
         return res.json();
       })
       .then((data) => {
+        setSlug(data.slug || "questionario");
         const qs =
           data.perguntas || data.questoes || data.questions || data || [];
         setQuestions(Array.isArray(qs) ? qs : []);
@@ -110,6 +112,19 @@ const Questionario = () => {
       try {
         const evalData = await evaluateStudent(resultData);
         setFeedback(evalData);
+        const response = await fetch(`${API_BASE_URL}/ia`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            score: evalData.pontuacao || evalData.nota,
+            descricao: evalData.feedback,
+            questionarioSlug: slug,
+          }),
+        });
+        console.log("Resposta enviada com sucesso", response);
       } catch (gptErr) {
         console.error(gptErr);
       }

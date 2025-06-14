@@ -1,6 +1,6 @@
 export async function evaluateStudent(resultData) {
   const apiKey =
-    "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";
+    "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";
 
   if (!apiKey) {
     throw new Error("OpenAI API key not provided");

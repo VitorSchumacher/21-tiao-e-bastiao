@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Svg = styled.svg`
   display: block;
-  overflow: hidden;
+  overflow: visible;
 `;
 
 const ScoreText = styled.text`
@@ -14,13 +14,10 @@ const ScoreText = styled.text`
 const ScoreGauge = ({ score = 0 }) => {
   const clamped = Math.max(0, Math.min(score, 1000));
   const angle = (clamped / 1000) * 180;
-  const radius = 40;
-  const x = 40 + radius * Math.cos(Math.PI - (angle * Math.PI) / 180);
-  const y = 40 - radius * Math.sin(Math.PI - (angle * Math.PI) / 180);
   const largeArc = angle > 90 ? 1 : 0;
   let color = "#22c55e"; // green
-  if (clamped < 500) color = "#ef4444"; // red
-  else if (clamped < 750) color = "#f59e0b"; // yellow
+  if (clamped < 400) color = "#ef4444"; // red
+  else if (clamped < 650) color = "#f59e0b"; // yellow
   return (
     <Svg width="80" height="40" viewBox="0 0 80 40">
       <path
@@ -30,7 +27,7 @@ const ScoreGauge = ({ score = 0 }) => {
         strokeWidth="8"
       />
       <path
-        d={`M0 40 A40 40 0 ${largeArc} 1 ${x} ${y}`}
+        d={`M0 40 A40 40 0 ${largeArc} 1 ${80} ${40}`}
         fill="none"
         stroke={color}
         strokeWidth="8"

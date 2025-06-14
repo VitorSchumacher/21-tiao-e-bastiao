@@ -58,7 +58,7 @@ const Dashboard = () => {
   const token = userData.token || "";
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/dashboard/alunos`, {
+    fetch(`${API_BASE_URL}/professor`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
@@ -66,15 +66,22 @@ const Dashboard = () => {
         return res.json();
       })
       .then((data) => {
-        if (Array.isArray(data)) setStudents(data);
+        if (Array.isArray(data.alunos))
+          setStudents([
+            ...data.alunos,
+
+            { nome: "Alice", pontuacaoTotal: 300 },
+            { nome: "Bruno", pontuacaoTotal: 450 },
+            { nome: "Carla", pontuacaoTotal: 700 },
+          ]);
         else setStudents([]);
       })
       .catch(() => {
         // Dados de exemplo caso a API não esteja disponível
         setStudents([
-          { nome: "Alice", pontuacao: 720 },
-          { nome: "Bruno", pontuacao: 450 },
-          { nome: "Carla", pontuacao: 890 },
+          { nome: "Alice", pontuacaoTotal: 300 },
+          { nome: "Bruno", pontuacaoTotal: 450 },
+          { nome: "Carla", pontuacaoTotal: 700 },
         ]);
       })
       .finally(() => setLoading(false));
@@ -85,7 +92,13 @@ const Dashboard = () => {
       <Banner>
         <UserMenu name={name} />
         <div
-          style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: 1, justifyContent: "center" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            flex: 1,
+            justifyContent: "center",
+          }}
         >
           <img
             src="/image/logo.png"
@@ -115,7 +128,7 @@ const Dashboard = () => {
                 <tr key={s.nome}>
                   <Td>{s.nome}</Td>
                   <Td>
-                    <ScoreGauge score={s.pontuacao} />
+                    <ScoreGauge score={s.pontuacaoTotal} />
                   </Td>
                 </tr>
               ))}
