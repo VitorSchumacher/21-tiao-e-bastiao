@@ -97,10 +97,30 @@ const Home = () => {
               border: "1px solid #4f46e5cc",
               padding: "1rem",
               borderRadius: "8px",
+              margin: "3rem 0",
             }}
           >
+            <div
+              style={{
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                gap: "1rem",
+                margin: "1rem 0",
+              }}
+            >
+              <FormIcon
+                size={40}
+                style={{ color: "#4f46e5", marginBottom: "0.5rem" }}
+              />
+              <h3 style={{ margin: "0.5rem", display: "inline" }}>
+                Formulário de Lógica
+              </h3>
+            </div>
             <div style={{ flex: 1, minWidth: "300px" }}>
-              <FormIcon size={40} style={{ color: "#4f46e5", marginBottom: "0.5rem" }} />
               <p>
                 Este formulário foi desenvolvido para avaliar o raciocínio
                 lógico do aluno, abordando questões que envolvem:
