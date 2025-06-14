@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import LogicForm from "./pages/LogicForm";
 import NotFound from "./pages/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -25,6 +26,14 @@ const App = () => {
         element={
           <PrivateRoute>
             <Dashboard />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/forms/logic"
+        element={
+          <PrivateRoute>
+            <LogicForm />
           </PrivateRoute>
         }
       />
