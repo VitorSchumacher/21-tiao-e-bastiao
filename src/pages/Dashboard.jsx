@@ -4,6 +4,7 @@ import Loader from "../components/Loader";
 import LogoutButton from "../components/LogoutButton";
 import UserMenu from "../components/UserMenu";
 import ScoreGauge from "../components/ScoreGauge";
+import EyeIcon from "../components/EyeIcon";
 
 const API_BASE_URL = process.env.VITE_API_BASE_URL || "/api";
 
@@ -53,9 +54,14 @@ const Td = styled.td`
 const Dashboard = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState({});
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Professor";
   const token = userData.token || "";
+
+  const toggleRow = (index) => {
+    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
+  };
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/professor`, {
@@ -121,16 +127,45 @@ const Dashboard = () => {
               <tr>
                 <Th>Aluno</Th>
                 <Th>Pontuação Média</Th>
+                <Th></Th>
               </tr>
             </thead>
             <tbody>
-              {students.map((s) => (
-                <tr key={s.nome}>
-                  <Td>{s.nome}</Td>
-                  <Td>
-                    <ScoreGauge score={s.pontuacaoTotal} />
-                  </Td>
-                </tr>
+              {students.map((s, idx) => (
+                <React.Fragment key={s.nome}>
+                  <tr>
+                    <Td>{s.nome}</Td>
+                    <Td>
+                      <ScoreGauge score={s.pontuacaoTotal} />
+                    </Td>
+                    <Td>
+                      <button
+                        onClick={() => toggleRow(idx)}
+                        style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+                        aria-label="Ver detalhes"
+                      >
+                        <EyeIcon />
+                      </button>
+                    </Td>
+                  </tr>
+                  {expanded[idx] && (
+                    <tr>
+                      <Td colSpan="3">
+                        {Array.isArray(s.questionarios) && s.questionarios.length > 0 ? (
+                          <ul style={{ margin: '0.5rem 1rem' }}>
+                            {s.questionarios.map((q, qIdx) => (
+                              <li key={qIdx} style={{ marginBottom: '0.25rem' }}>
+                                <strong>{q.descricao}:</strong> {q.score || q.pontuacao}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <em>Nenhum resultado</em>
+                        )}
+                      </Td>
+                    </tr>
+                  )}
+                </React.Fragment>
               ))}
             </tbody>
           </Table>
