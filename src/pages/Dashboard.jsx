@@ -74,7 +74,10 @@ const Dashboard = () => {
       const text = await teacherAdvice(student);
       setAdvice((prev) => ({ ...prev, [index]: { text } }));
     } catch (e) {
-      setAdvice((prev) => ({ ...prev, [index]: { text: "Erro ao obter resumo" } }));
+      setAdvice((prev) => ({
+        ...prev,
+        [index]: { text: "Erro ao obter resumo" },
+      }));
     }
   };
 
@@ -188,15 +191,27 @@ const Dashboard = () => {
                         ) : (
                           <em>Nenhum resultado</em>
                         )}
-                        <div style={{ marginTop: "0.5rem" }}>
+                        <div
+                          style={{
+                            marginTop: "0.5rem",
+                            alignItems: "center",
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        >
                           <Button onClick={() => getAdvice(idx)}>
                             Resumo de como ajudar
                           </Button>
                           {advice[idx]?.loading && (
-                            <span style={{ marginLeft: "0.5rem" }}>Carregando...</span>
+                            <span style={{ marginLeft: "0.5rem" }}>
+                              Carregando...
+                            </span>
                           )}
                           {advice[idx]?.text && (
-                            <p style={{ marginTop: "0.5rem" }}>{advice[idx].text}</p>
+                            <p style={{ marginTop: "0.5rem" }}>
+                              {advice[idx].text}
+                            </p>
                           )}
                         </div>
                       </Td>

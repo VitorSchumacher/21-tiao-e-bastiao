@@ -1,6 +1,6 @@
 export async function evaluateStudent(resultData) {
   const apiKey =
-    "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";
+    "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";
 
   if (!apiKey) {
     throw new Error("OpenAI API key not provided");
@@ -62,7 +62,7 @@ export async function evaluateStudent(resultData) {
 
 export async function teacherAdvice(studentData) {
   const apiKey =
-    "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";
+    "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";
 
   if (!apiKey) {
     throw new Error("OpenAI API key not provided");
@@ -76,7 +76,9 @@ export async function teacherAdvice(studentData) {
     },
     {
       role: "user",
-      content: `Dados do aluno: ${JSON.stringify(studentData)}. Gere um breve resumo sobre como o professor pode auxiliar o aluno a evoluir.`,
+      content: `Dados do aluno: ${JSON.stringify(
+        studentData
+      )}. Gere um breve resumo sobre como o professor pode auxiliar o aluno a evoluir.`,
     },
   ];
 
