@@ -3,48 +3,8 @@ import styled, { keyframes } from "styled-components";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Button from "../components/Button";
-import Card from "../components/Card";
+import FormLayout, { Form, Logo } from "../components/FormLayout";
 import { useNavigate } from "react-router-dom";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  padding: 1rem;
-  font-family: "Roboto", sans-serif;
-  transition: background 0.5s ease;
-`;
-
-const Logo = styled.img`
-  width: 100px;
-  height: auto;
-  display: block;
-  margin: 0 auto 1.5rem auto;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const StyledCard = styled(Card)`
-  padding: 4rem;
-  border-radius: 20px;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 1000px;
-  min-height: 500px;
-  background-color: #ffffffee;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  }
-`;
 
 const ErrorMessage = styled.p`
   color: red;
@@ -85,7 +45,7 @@ const HeaderTitle = styled.h1`
   text-align: center;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  font-family: "Roboto", sans-serif;
+  font-family: "Edu TAS Beginner", cursive;
   font-weight: 500;
   transition: color 0.3s ease;
   cursor: pointer;
@@ -161,14 +121,13 @@ const Register = () => {
   };
 
   return (
-    <Container>
+    <FormLayout>
       {loading && (
         <LoadingOverlay>
           <Spinner />
         </LoadingOverlay>
       )}
-      <StyledCard>
-        <Logo src="/image/gato.webp" alt="Logo do Projeto" />
+      <Logo src="/image/gato.webp" alt="Logo do Projeto" />
         <HeaderTitle>Cadastro</HeaderTitle>
         <Form onSubmit={handleSubmit} noValidate>
           <Input
@@ -212,8 +171,7 @@ const Register = () => {
           <Button type="submit">Cadastrar</Button>
           {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
         </Form>
-      </StyledCard>
-    </Container>
+    </FormLayout>
   );
 };
 
