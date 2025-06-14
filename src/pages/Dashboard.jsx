@@ -141,7 +141,11 @@ const Dashboard = () => {
                     <Td>
                       <button
                         onClick={() => toggleRow(idx)}
-                        style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          cursor: "pointer",
+                        }}
                         aria-label="Ver detalhes"
                       >
                         <EyeIcon />
@@ -151,11 +155,18 @@ const Dashboard = () => {
                   {expanded[idx] && (
                     <tr>
                       <Td colSpan="3">
-                        {Array.isArray(s.questionarios) && s.questionarios.length > 0 ? (
-                          <ul style={{ margin: '0.5rem 1rem' }}>
+                        {Array.isArray(s.questionarios) &&
+                        s.questionarios.length > 0 ? (
+                          <ul style={{ margin: "0.5rem 1rem" }}>
                             {s.questionarios.map((q, qIdx) => (
-                              <li key={qIdx} style={{ marginBottom: '0.25rem' }}>
-                                <strong>{q.descricao}:</strong> {q.score || q.pontuacao}
+                              <li
+                                key={qIdx}
+                                style={{ marginBottom: "0.25rem" }}
+                              >
+                                <p>{q.descricao}</p>
+                                <strong>
+                                  Pontuação no teste: {q.score || q.pontuacao}
+                                </strong>
                               </li>
                             ))}
                           </ul>
