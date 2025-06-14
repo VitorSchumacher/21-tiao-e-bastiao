@@ -36,7 +36,8 @@ const Intro = styled.div`
 
 const IntroImage = styled.img`
   width: 35%;
-  height: auto;
+  height: 250px;
+  border-radius: 10px;
 `;
 
 const Home = () => {
@@ -48,13 +49,36 @@ const Home = () => {
         <Title>Orienta</Title>
       </Banner>
       <Intro>
-        <h2>Bem-vindo ao Orienta</h2>
-        <IntroImage src="/image/intro-placeholder.webp" alt="Imagem inicial" />
+        <div style={{ width: "60%", maxWidth: "600px" }}>
+          <h2
+            style={{
+              fontSize: "2rem",
+              marginBottom: "1rem",
+              textAlign: "center",
+            }}
+          >
+            Bem-vindo ao Orienta
+          </h2>
+          <p>
+            Orienta é uma plataforma educacional inteligente focada na avaliação
+            individual do aluno e na geração de sugestões personalizadas de
+            melhoria. Aqui, o aluno responde quizzes organizados por áreas do
+            conhecimento — como Matemática, Português e Lógica — e, ao final,
+            recebe um relatório com:
+            <ul style={{ margin: "1rem 2rem" }}>
+              <li>Questões certas e erradas</li>
+              <li>Áreas que precisam de reforço</li>
+              <li>Dicas para melhorar o desempenho</li>
+            </ul>
+            Esses relatórios são automaticamente enviados ao professor, que pode
+            acompanhar de forma clara o progresso de cada aluno e identificar os
+            pontos que exigem mais atenção. Orienta transforma dados em
+            orientação personalizada — para aprender de forma mais eficiente e
+            com foco no que realmente importa.
+          </p>
+        </div>
+        <IntroImage src="/image/imagem_home.jpg" alt="Imagem inicial" />
       </Intro>
-      <p>
-        Nesta página você encontrará informações sobre o projeto e poderá
-        acessar os formulários disponíveis para preenchimento.
-      </p>
       <ul style={{ listStyle: "none", padding: 0, marginBottom: "1rem" }}>
         <li style={{ marginBottom: "0.5rem" }}>
           <Button onClick={() => navigate("/forms/logic")}>
