@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../components/Button";
-import LogoutButton from "../components/LogoutButton";
+import UserMenu from "../components/UserMenu";
 import DoubleDiagonalBanner from "../components/DoubleDiagonalBanner";
 import FormIcon from "../components/FormIcon";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,9 @@ const Banner = styled.div`
   background: linear-gradient(135deg, #4f46e5, #6b5ce7, #8b5cf6);
   color: #fff;
   padding: 4rem 2rem;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
   margin: -2rem -2rem 2rem;
 `;
@@ -27,6 +29,8 @@ const Title = styled.h1`
   font-size: 2.5rem;
   font-family: "Edu TAS Beginner", cursive;
   margin: 0;
+  flex: 1;
+  text-align: center;
 `;
 
 const Intro = styled.div`
@@ -45,10 +49,13 @@ const IntroImage = styled.img`
 
 const Home = () => {
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  const name = userData.nome || "Aluno";
 
   return (
     <Container>
       <Banner>
+        <UserMenu name={name} />
         <Title>Orienta</Title>
       </Banner>
       <Intro>
@@ -245,9 +252,6 @@ const Home = () => {
           </div>
         </li>
       </ul>
-      <div style={{ marginTop: "1rem" }}>
-        <LogoutButton />
-      </div>
     </Container>
   );
 };
