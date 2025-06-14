@@ -26,6 +26,19 @@ const Title = styled.h1`
   margin: 0;
 `;
 
+const Intro = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+`;
+
+const IntroImage = styled.img`
+  width: 35%;
+  height: auto;
+`;
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -34,7 +47,10 @@ const Home = () => {
       <Banner>
         <Title>Orienta</Title>
       </Banner>
-      <h2>Bem-vindo ao Orienta</h2>
+      <Intro>
+        <h2>Bem-vindo ao Orienta</h2>
+        <IntroImage src="/image/intro-placeholder.webp" alt="Imagem inicial" />
+      </Intro>
       <p>
         Nesta página você encontrará informações sobre o projeto e poderá
         acessar os formulários disponíveis para preenchimento.
