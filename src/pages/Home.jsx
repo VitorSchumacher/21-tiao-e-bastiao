@@ -99,6 +99,7 @@ const Home = () => {
             }}
           >
             <div style={{ flex: 1, minWidth: "300px" }}>
+              {/* adicionar icone de formulario  */}
               <p>
                 Este formulário foi desenvolvido para avaliar o raciocínio
                 lógico do aluno, abordando questões que envolvem:
