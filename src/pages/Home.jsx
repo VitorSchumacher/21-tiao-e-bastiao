@@ -37,7 +37,7 @@ const Intro = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 5rem 0 9rem;
   flex-wrap: wrap;
 `;
 
@@ -71,6 +71,11 @@ const Home = () => {
     <Container>
       <Banner>
         <UserMenu name={name} />
+        <img
+          src="/image/logo.png"
+          alt="Logo Orienta"
+          style={{ height: "60px" }}
+        />
         <Title>Orienta</Title>
       </Banner>
       <Intro>
@@ -205,7 +210,9 @@ const Home = () => {
               </ul>
             </div>
             <div style={{ marginLeft: "1rem", width: "200px" }}>
-              <Button onClick={() => navigate("/forms/math")}>Ir para o formulário de Matemática</Button>
+              <Button onClick={() => navigate("/forms/math")}>
+                Ir para o formulário de Matemática
+              </Button>
             </div>
           </div>
         </li>
@@ -254,7 +261,9 @@ const Home = () => {
               </ul>
             </div>
             <div style={{ marginLeft: "1rem", width: "200px" }}>
-              <Button onClick={() => navigate("/forms/portuguese")}>Ir para o formulário de Português</Button>
+              <Button onClick={() => navigate("/forms/portuguese")}>
+                Ir para o formulário de Português
+              </Button>
             </div>
           </div>
         </li>
