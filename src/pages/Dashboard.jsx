@@ -136,9 +136,6 @@ const Dashboard = () => {
           </Table>
         </>
       )}
-      <div style={{ marginTop: "2rem" }}>
-        <LogoutButton />
-      </div>
     </Container>
   );
 };
