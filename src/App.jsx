@@ -7,7 +7,6 @@ import Dashboard from "./pages/Dashboard";
 import LogicForm from "./pages/LogicForm";
 import MathForm from "./pages/MathForm";
 import PortugueseForm from "./pages/PortugueseForm";
-import Questionario from "./pages/Questionario";
 import NotFound from "./pages/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -53,14 +52,6 @@ const App = () => {
         element={
           <PrivateRoute>
             <PortugueseForm />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/forms/questionario"
-        element={
-          <PrivateRoute>
-            <Questionario />
           </PrivateRoute>
         }
       />
