@@ -5,6 +5,8 @@ import UserMenu from "../components/UserMenu";
 import Loader from "../components/Loader";
 import { evaluateStudent } from "../services/gpt";
 
+const API_BASE_URL = process.env.VITE_API_BASE_URL || "/api";
+
 const Container = styled.div`
   padding: 2rem;
   min-height: 100vh;
@@ -46,7 +48,6 @@ const Options = styled.div`
 const Questionario = () => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
-  const [formSlug, setFormSlug] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState(null);
@@ -56,7 +57,7 @@ const Questionario = () => {
   const token = userData.token || "";
 
   useEffect(() => {
-    fetch("https://code-race-qfh4.onrender.com/questionario", {
+    fetch(`${API_BASE_URL}/questionario`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -68,7 +69,6 @@ const Questionario = () => {
       .then((data) => {
         const qs =
           data.perguntas || data.questoes || data.questions || data || [];
-        setFormSlug(data.slug || "");
         setQuestions(Array.isArray(qs) ? qs : []);
         setLoading(false);
       })
@@ -92,17 +92,14 @@ const Questionario = () => {
         }))
         .filter((r) => r.letraEscolhida !== undefined);
       const payload = { respostas };
-      const response = await fetch(
-        "https://code-race-qfh4.onrender.com/questionario/responder",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/questionario/responder`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
       if (!response.ok) {
         throw new Error("Erro ao enviar respostas");
       }

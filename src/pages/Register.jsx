@@ -6,6 +6,8 @@ import Button from "../components/Button";
 import FormLayout, { Form, Logo } from "../components/FormLayout";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = process.env.VITE_API_BASE_URL || "/api";
+
 const ErrorMessage = styled.p`
   color: red;
   text-align: center;
@@ -102,14 +104,11 @@ const Register = () => {
     if (!validate()) return;
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://code-race-qfh4.onrender.com/usuario",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, email, senha, tipoUsuario }),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/usuario`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, email, senha, tipoUsuario }),
+      });
       if (!response.ok) {
         throw new Error("Erro ao cadastrar");
       }

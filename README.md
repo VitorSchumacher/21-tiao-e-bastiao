@@ -1,6 +1,8 @@
 # CodeRace 2025 Frontend
 
-Este projeto é uma aplicação React construída com Vite. Ele contém um formulário de login simples e algumas páginas utilizadas no evento CodeRace 2025. O formulário de login se autentica no backend disponível em `https://code-race-qfh4.onrender.com/auth`.
+Este projeto é uma aplicação React construída com Vite. Ele contém um formulário de login simples e algumas páginas utilizadas no evento CodeRace 2025. O formulário de login se autentica no backend disponível em `https://code-race-qfh4.onrender.com`.
+
+Para facilitar o desenvolvimento sem problemas de CORS, todas as requisições para a API são feitas através do caminho `/api`. O Vite realiza o proxy dessas rotas para o backend real durante o desenvolvimento e o arquivo `vercel.json` faz a reescrita em produção. O endereço do backend pode ser configurado pela variável `VITE_API_BASE_URL`.
 
 ## Exemplo de credenciais de login
 

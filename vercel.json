@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://code-race-qfh4.onrender.com/$1" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
