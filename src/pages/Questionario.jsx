@@ -51,6 +51,7 @@ const Questionario = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Aluno";
@@ -84,6 +85,7 @@ const Questionario = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
     try {
       const respostas = questions
         .map((q, index) => ({
@@ -117,6 +119,7 @@ const Questionario = () => {
       console.error(err);
       setError("Erro ao enviar respostas");
     }
+    setSubmitting(false);
   };
 
   return (
@@ -139,47 +142,50 @@ const Questionario = () => {
           <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
             Questionário de Lógica
           </h1>
-          <form
-            onSubmit={handleSubmit}
-            style={{ maxWidth: "800px", margin: "0 auto" }}
-          >
-            {questions.map((q, index) => (
-              <QuestionWrapper key={q.id || index}>
-                <p>{q.enunciado || q.pergunta || q.titulo}</p>
-                <Options>
-                  {(q.opcoes || q.alternativas || []).map((opt, idx) => {
-                    const value = opt.letra ?? idx;
-                    const label = opt.texto || opt;
-                    return (
-                      <label
-                        key={value}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.25rem",
-                        }}
-                      >
-                        <input
-                          type="radio"
-                          name={`q-${index}`}
-                          value={value}
-                          checked={answers[index] === value}
-                          onChange={() => handleChange(index, value)}
-                        />
-                        {label}
-                      </label>
-                    );
-                  })}
-                </Options>
-              </QuestionWrapper>
-            ))}
-            {questions.length > 0 && (
-              <Button type="submit" style={{ marginTop: "1rem" }}>
-                Enviar
-              </Button>
-            )}
-          </form>
-          {feedback && (
+          {submitting && <Loader />}
+          {!submitting && !feedback && (
+            <form
+              onSubmit={handleSubmit}
+              style={{ maxWidth: "800px", margin: "0 auto" }}
+            >
+              {questions.map((q, index) => (
+                <QuestionWrapper key={q.id || index}>
+                  <p>{q.enunciado || q.pergunta || q.titulo}</p>
+                  <Options>
+                    {(q.opcoes || q.alternativas || []).map((opt, idx) => {
+                      const value = opt.letra ?? idx;
+                      const label = opt.texto || opt;
+                      return (
+                        <label
+                          key={value}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.25rem",
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            name={`q-${index}`}
+                            value={value}
+                            checked={answers[index] === value}
+                            onChange={() => handleChange(index, value)}
+                          />
+                          {label}
+                        </label>
+                      );
+                    })}
+                  </Options>
+                </QuestionWrapper>
+              ))}
+              {questions.length > 0 && (
+                <Button type="submit" style={{ marginTop: "1rem" }}>
+                  Enviar
+                </Button>
+              )}
+            </form>
+          )}
+          {!submitting && feedback && (
             <p style={{ marginTop: "2rem", whiteSpace: "pre-line" }}>
               {feedback}
             </p>
