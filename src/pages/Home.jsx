@@ -65,7 +65,7 @@ const Home = () => {
             melhoria. Aqui, o aluno responde quizzes organizados por áreas do
             conhecimento — como Matemática, Português e Lógica — e, ao final,
             recebe um relatório com:
-            <ul style={{ margin: "1rem 2rem" }}>
+            <ul style={{ margin: "0.5rem 2rem" }}>
               <li>Questões certas e erradas</li>
               <li>Áreas que precisam de reforço</li>
               <li>Dicas para melhorar o desempenho</li>
@@ -81,9 +81,13 @@ const Home = () => {
       </Intro>
       <ul style={{ listStyle: "none", padding: 0, marginBottom: "1rem" }}>
         <li style={{ marginBottom: "0.5rem" }}>
-          <Button onClick={() => navigate("/forms/logic")}>
-            Formulário de Lógica
-          </Button>
+          <div>
+            <p>aqui vai oque o formulario traz</p>
+            <p> icone bonito sobre logica</p>
+            <Button onClick={() => navigate("/forms/logic")}>
+              Formulário de Lógica
+            </Button>
+          </div>
         </li>
         <li style={{ marginBottom: "0.5rem" }}>
           <Button disabled>Formulário de Matemática</Button>
