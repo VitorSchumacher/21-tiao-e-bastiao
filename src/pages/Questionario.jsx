@@ -50,9 +50,14 @@ const Questionario = () => {
 
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const name = userData.nome || "Aluno";
+  const token = userData.token || "";
 
   useEffect(() => {
-    fetch("https://code-race-qfh4.onrender.com/questionario")
+    fetch("https://code-race-qfh4.onrender.com/questionario", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         if (!res.ok) throw new Error("Erro ao buscar question\u00e1rio");
         return res.json();
