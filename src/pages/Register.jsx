@@ -100,7 +100,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  const [tipo, setTipo] = useState("aluno");
+  // 0 representa Aluno e 1 representa Professor
+  const [tipoUsuario, setTipoUsuario] = useState(0);
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -146,7 +147,7 @@ const Register = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, email, senha, tipo }),
+          body: JSON.stringify({ nome, email, senha, tipoUsuario }),
         }
       );
       if (!response.ok) {
@@ -202,11 +203,11 @@ const Register = () => {
           />
           <Select
             label="Tipo de usu\u00e1rio"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
+            value={tipoUsuario}
+            onChange={(e) => setTipoUsuario(parseInt(e.target.value, 10))}
           >
-            <option value="professor">Professor</option>
-            <option value="aluno">Aluno</option>
+            <option value={1}>Professor</option>
+            <option value={0}>Aluno</option>
           </Select>
           <Button type="submit">Cadastrar</Button>
           {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
