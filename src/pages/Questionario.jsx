@@ -89,7 +89,7 @@ const Questionario = () => {
           letraEscolhida: answers[index],
         }))
         .filter((r) => r.letraEscolhida !== undefined);
-      const payload = { slug: formSlug, respostas };
+      const payload = { respostas };
       const response = await fetch(
         "https://code-race-qfh4.onrender.com/questionario/responder",
         {
@@ -140,7 +140,7 @@ const Questionario = () => {
                 <p>{q.enunciado || q.pergunta || q.titulo}</p>
                 <Options>
                   {(q.opcoes || q.alternativas || []).map((opt, idx) => {
-                    const value = opt.id ?? idx;
+                    const value = opt.letra ?? idx;
                     const label = opt.texto || opt;
                     return (
                       <label
