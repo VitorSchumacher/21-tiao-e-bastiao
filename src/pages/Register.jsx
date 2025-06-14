@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Input from "../components/Input";
+import Select from "../components/Select";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
@@ -99,6 +100,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [tipo, setTipo] = useState("aluno");
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -144,7 +146,7 @@ const Register = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, email, senha }),
+          body: JSON.stringify({ nome, email, senha, tipo }),
         }
       );
       if (!response.ok) {
@@ -198,6 +200,14 @@ const Register = () => {
             onChange={(e) => setConfirmarSenha(e.target.value)}
             error={errors.confirmarSenha}
           />
+          <Select
+            label="Tipo de usu\u00e1rio"
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+          >
+            <option value="professor">Professor</option>
+            <option value="aluno">Aluno</option>
+          </Select>
           <Button type="submit">Cadastrar</Button>
           {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
         </Form>
