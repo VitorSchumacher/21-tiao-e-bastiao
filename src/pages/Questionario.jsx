@@ -45,6 +45,7 @@ const Options = styled.div`
 const Questionario = () => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
+  const [formSlug, setFormSlug] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -65,6 +66,7 @@ const Questionario = () => {
       .then((data) => {
         const qs =
           data.perguntas || data.questoes || data.questions || data || [];
+        setFormSlug(data.slug || "");
         setQuestions(Array.isArray(qs) ? qs : []);
         setLoading(false);
       })
@@ -81,6 +83,11 @@ const Questionario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const respostas = questions.map((q, index) => ({
+        slug: q.slug || q.id || index,
+        letraEscolhida: answers[index],
+      })).filter((r) => r.letraEscolhida !== undefined);
+      const payload = { slug: formSlug, respostas };
       const response = await fetch(
         "https://code-race-qfh4.onrender.com/questionario/responder",
         {
@@ -89,7 +96,7 @@ const Questionario = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(answers),
+          body: JSON.stringify(payload),
         }
       );
       if (!response.ok) {
