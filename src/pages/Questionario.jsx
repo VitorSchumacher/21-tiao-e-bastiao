@@ -109,6 +109,7 @@ const Questionario = () => {
         const evalData = await evaluateStudent(resultData);
         const score = evalData.pontuacao ?? "-";
         setFeedback(`Pontuação: ${score} - ${evalData.feedback}`);
+        console.log("🚀 ~ handleSubmit ~ feedback:", feedback);
       } catch (gptErr) {
         console.error(gptErr);
       }
@@ -179,7 +180,9 @@ const Questionario = () => {
             )}
           </form>
           {feedback && (
-            <p style={{ marginTop: "2rem", whiteSpace: "pre-line" }}>{feedback}</p>
+            <p style={{ marginTop: "2rem", whiteSpace: "pre-line" }}>
+              {feedback}
+            </p>
           )}
         </div>
       )}
