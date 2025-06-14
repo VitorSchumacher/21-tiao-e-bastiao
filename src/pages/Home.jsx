@@ -41,6 +41,21 @@ const Intro = styled.div`
   flex-wrap: wrap;
 `;
 
+const IntroText = styled.div`
+  width: 60%;
+  max-width: 600px;
+`;
+
+const IntroHeading = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: "Edu TAS Beginner", cursive;
+  background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
 const IntroImage = styled.img`
   width: 35%;
   height: 250px;
@@ -59,16 +74,8 @@ const Home = () => {
         <Title>Orienta</Title>
       </Banner>
       <Intro>
-        <div style={{ width: "60%", maxWidth: "600px" }}>
-          <h2
-            style={{
-              fontSize: "1.7rem",
-              marginBottom: "1rem",
-              textAlign: "center",
-            }}
-          >
-            Bem-vindo ao Orienta
-          </h2>
+        <IntroText>
+          <IntroHeading>Bem-vindo ao Orienta</IntroHeading>
           <p>
             Orienta é uma plataforma educacional inteligente focada na avaliação
             individual do aluno e na geração de sugestões personalizadas de
@@ -86,7 +93,7 @@ const Home = () => {
             orientação personalizada — para aprender de forma mais eficiente e
             com foco no que realmente importa.
           </p>
-        </div>
+        </IntroText>
         <IntroImage src="/image/imagem_home.jpg" alt="Imagem inicial" />
       </Intro>
       <div style={{ marginTop: "5rem" }}>
