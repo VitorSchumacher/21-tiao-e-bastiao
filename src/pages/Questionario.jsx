@@ -78,9 +78,28 @@ const Questionario = () => {
     setAnswers((prev) => ({ ...prev, [qIndex]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(answers);
+    try {
+      const response = await fetch(
+        "https://code-race-qfh4.onrender.com/questionario/responder",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(answers),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Erro ao enviar respostas");
+      }
+      console.log("Respostas enviadas com sucesso");
+    } catch (err) {
+      console.error(err);
+      setError("Erro ao enviar respostas");
+    }
   };
 
   return (
