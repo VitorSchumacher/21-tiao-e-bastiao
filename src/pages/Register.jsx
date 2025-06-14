@@ -202,7 +202,7 @@ const Register = () => {
             error={errors.confirmarSenha}
           />
           <Select
-            label="Tipo de usu\u00e1rio"
+            label="Tipo de usuário"
             value={tipoUsuario}
             onChange={(e) => setTipoUsuario(parseInt(e.target.value, 10))}
           >
